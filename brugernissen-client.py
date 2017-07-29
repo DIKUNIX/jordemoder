@@ -1,5 +1,4 @@
 #!/usr/bin/env python3.5
-# encoding: utf8
 #
 # A client program to test brugernissen.py.
 
