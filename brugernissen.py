@@ -41,7 +41,7 @@ def make_user(fd, username, ssh_key):
                 cwd='/home/' + username]) != 0:
                 fd.write('Failed to create dikunix.dk/~{}.'.format(username))
 
-FRONTEND_USERNAME='athas'
+FRONTEND_USERNAME='jordemoder'
 
 def run_main():
     if len(sys.argv) != 2:
