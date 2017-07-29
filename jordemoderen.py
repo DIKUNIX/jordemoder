@@ -165,9 +165,6 @@ def frafil(sti):
 def fejl_html(s):
     return '<p style="color: maroon">Fejl: {}</p>'.format(html.escape(s))
 
-def er_godt_brugernavn(navn):
-    return 3 <= len(navn) <= 20 and navn.islower()
-
 def brugernavn_er_i_brug(navn):
     return navn in subprocess.run(
         'cut -d: -f1 < /etc/passwd',
