@@ -30,5 +30,7 @@ http://www.skipfeed.com/2017/06/uwsgi-on-openbsd.html
 
 ## Resultater
 
+Fastcgi-log i `/home/jordemoder/uwsgi.log`.
+
 Når en bruger oprettes, gemmes brugernavnet med dets tilhørende email i
 `/home/jordemoder/brugere.csv`.

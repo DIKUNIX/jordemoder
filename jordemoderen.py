@@ -1,3 +1,5 @@
+# Webgrænsefladen.
+#
 # Kør kun det her entrådet.
 
 import os.path
@@ -13,24 +15,6 @@ import random
 from flask import Flask, request
 
 from nisselib import *
-
-
-# WEB.
-
-app = Flask(__name__)
-
-@app.route('/ny-bruger/', methods=['GET'])
-def ny_bruger_get():
-    aktiveringskode = request.args.get('aktivering')
-    if aktiveringskode is None:
-        return ny_bruger_vis()
-    else:
-        navn = request.args.get('navn')
-        return ny_bruger_aktiver(aktiveringskode, navn)
-
-@app.route('/ny-bruger/', methods=['POST'])
-def ny_bruger_post():
-    return ny_bruger_arbejd()
 
 
 # DATABASE.
@@ -75,6 +59,24 @@ if not os.path.isfile(endelig_csv):
 # Fjern gamle oprettelser.
 remove_rows(igang_csv, lambda _0, _1, _2, _3, tid:
             time.time() - float(tid) < 60.0 * 60.0)
+
+
+# WSGI.
+
+app = Flask(__name__)
+
+@app.route('/ny-bruger/', methods=['GET'])
+def ny_bruger_get():
+    aktiveringskode = request.args.get('aktivering')
+    if aktiveringskode is None:
+        return ny_bruger_vis()
+    else:
+        navn = request.args.get('navn')
+        return ny_bruger_aktiver(aktiveringskode, navn)
+
+@app.route('/ny-bruger/', methods=['POST'])
+def ny_bruger_post():
+    return ny_bruger_arbejd()
 
 
 # SIDER.
