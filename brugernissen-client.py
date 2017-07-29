@@ -1,6 +1,6 @@
 #!/usr/bin/env python3.5
 #
-# A client program to test brugernissen.py.
+# An example client program to test brugernissen.py.
 
 import socket
 import sys

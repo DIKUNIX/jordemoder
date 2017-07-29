@@ -12,7 +12,7 @@ import random
 
 from flask import Flask, request
 
-
+from nisselib import *
 
 
 # WEB.
@@ -74,7 +74,7 @@ if not os.path.isfile(endelig_csv):
 
 # Fjern gamle oprettelser.
 remove_rows(igang_csv, lambda _0, _1, _2, _3, tid:
-            time.time() - int(tid) < 60 * 60)
+            time.time() - float(tid) < 60.0 * 60.0)
 
 
 # SIDER.
@@ -91,9 +91,9 @@ def ny_bruger_arbejd():
     emailadresse = data['emailadresse']
     sshkey = data['sshkey'].strip()
 
-    if not er_godt_brugernavn(navn):
+    if not is_valid_username(navn):
         return frafil('ny-bruger.html').format(
-            fejlbesked=fejl_html('Dit brugernavn må kun bestå af små bogstaver og ingen danske bogstaver og skal være mellem 3 og 20 tegn langt.'),
+            fejlbesked=fejl_html('Dit brugernavn skal matche det regulære udtryk {}.'.format(VALID_USERNAMES_REGEX)),
             navn='',
             emailadresse=html.escape(emailadresse),
             sshkey=html.escape(sshkey))
@@ -112,9 +112,9 @@ def ny_bruger_arbejd():
             emailadresse='',
             sshkey=html.escape(sshkey))
 
-    if sshkey == '':
+    if not is_valid_ssh_key(sshkey):
         return frafil('ny-bruger.html').format(
-            fejlbesked=fejl_html('Du skal angive din offentlige ssh-nøgle.'),
+            fejlbesked=fejl_html('Din offentlige ssh-nøgle ser forkert ud.'),
             navn=html.escape(navn),
             emailadresse=html.escape(emailadresse),
             sshkey='')
