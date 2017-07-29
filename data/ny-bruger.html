@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Opret bruger</title>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <h1>Opret bruger</h1>
+
+    <p>Opret en bruger til dikunix.dk.</p>
+
+    {fejlbesked}
+
+    <form action="" method="post">
+      <p>
+	Ønsket brugernavn:<br>
+	<input type="text" name="navn" value="{navn}">
+      </p>
+      <p>
+	Din KU-emailadresse (xyz123@alumni.ku.dk):<br>
+	<input type="text" name="emailadresse" value="{emailadresse}">
+      </p>
+      <p>
+	Din offentlige SSH-nøgle (~/.ssh/id_rsa.pub):<br>
+	<textarea name="sshkey">{sshkey}</textarea>
+      </p>
+      <input type="submit" value="Opret">
+    </form>
+  </body>
+</html>

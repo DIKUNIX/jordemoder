@@ -1,0 +1,16 @@
+Hej {navn}
+
+Du har bedt om en bruger på dikunix.dk.  Den er fin!
+
+Gå ind på {link}
+for at aktivere din bruger.  Du skal gøre dette indenfor en times tid.
+
+Dernæst kan du logge ind på serveren ved at køre:
+
+    ssh {navn}@dikunix.dk
+
+Du kan ikke svare på denne email.
+
+--
+Venlig hilsen
+DIKUNIX-jordemoderen
