@@ -18,6 +18,7 @@ import base64
 import binascii
 import struct
 import subprocess
+import pwd
 
 def is_valid_ssh_key(ssh_key):
     # All this is taken from https://gist.github.com/piyushbansal/5243418
@@ -60,19 +61,30 @@ def make_user(fd, username, ssh_key):
                             '-p', '',
                             '-G', secondary_group,
                             '-c', comment,
+                            '-m',
                             username]) != 0:
             fd.write('Failed to create user.')
         else:
-            pass
+            with open('/home/%s/.ssh/authorized_keys' % username, 'w') as f:
+                f.write(ssh_key)
+
+FRONTEND_USERNAME='athas'
 
 def run_main():
     if len(sys.argv) != 2:
         sys.exit('Usage: %s <socket-filename>' % sys.argv[0])
     socketname = sys.argv[1]
 
-    os.unlink(socketname)
+    frontend_uid=pwd.getpwnam(FRONTEND_USERNAME)[2]
+
+    try:
+        os.unlink(socketname)
+    except FileNotFoundError:
+        pass
     s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     s.bind(socketname)
+    os.chown(socketname, frontend_uid, -1)
+    os.chmod(socketname, stat.S_IRUSR | stat.S_IWUSR | stat.S_IXUSR)
     s.listen(1)
 
     print('Jeg står klar ved %s' % socketname)
@@ -94,6 +106,8 @@ def run_main():
             print('Endnu en kunde ekspederet!')
         except Exception as e:
             print('Unhandled exception: ' + str(e))
+            fd.write('Internal error: ' + str(e))
+            fd.close()
 
 if __name__ == '__main__':
     try:
