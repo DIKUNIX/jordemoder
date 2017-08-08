@@ -21,6 +21,27 @@ Sørg for at `fastcgi/start.sh` køres ved boot af jordemoder.
 
 Sørg for at `brugernissen.py` køres ved boot af root.
 
+Hertil kan du bruge `crontab`. `-u` argumentet kan bruges til at skedulere
+opgaver for en givet bruger. `-l` argumentet kan bruges til at liste hvilke
+opgaver der er registreret. `-e` argumentet kan bruges til at modificere
+opgavelisten. F.eks., for `jordemoder` skal der stå:
+
+```
+$ crontab -u jordemoder -l
+...
+@reboot /home/jordemoder/multiuser/fastcgi/start.sh
+...
+```
+
+Ligeledes for `root` skal der stå:
+
+```
+$ crontab -u root -l
+...
+@reboot /home/jordemoder/multiuser/brugernissen.py
+...
+```
+
 Sørg for at kunne sende emails fra serveren.
 
 Nogle OpenBSD-indstillinger skal drejes lidt for at jordemoder har nok
