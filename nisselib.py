@@ -5,7 +5,7 @@ import re
 
 
 def is_valid_ssh_key(ssh_key):
-    # All this is taken from https://gist.github.com/piyushbansal/5243418
+    # Inspired by https://gist.github.com/piyushbansal/5243418
     array=bytes(ssh_key, encoding='utf8').split()
     # Each rsa-ssh key has 3 different strings in it, first one being
     # typeofkey second one being keystring third one being username .
