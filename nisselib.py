@@ -24,7 +24,7 @@ def is_valid_ssh_key(ssh_key):
     try :
         str_len = struct.unpack('>I', data[:4])[0]
     except struct.error :
-        return false
+        return False
     # data[4:11] must have string which matches with the typeofkey , another ssh key property.
     return data[4:4+str_len] == typeofkey and int(str_len) == int(7)
 
