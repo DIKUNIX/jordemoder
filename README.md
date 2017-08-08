@@ -7,8 +7,7 @@ Kravlegård og legeplads for studerende.
 
 ```
 pkg_add py3-pip
-pip install uwsgi
-pip install flask
+pip install -r requirements.txt
 ```
 
 
