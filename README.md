@@ -54,3 +54,11 @@ Fastcgi-log i `/home/jordemoder/uwsgi.log`.
 
 Når en bruger oprettes, gemmes brugernavnet med dets tilhørende email i
 `/home/jordemoder/brugere.csv`.
+
+## Afprøvning
+
+Der er lidt afprøvning nede i `./tests/`. Du kan køre afprøvning således:
+
+```
+$ python3 -m pytest ./tests/
+```
