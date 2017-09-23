@@ -14,14 +14,15 @@ pip install flask
 
 ## Opsætning
 
-Hav `include "/home/jordemoder/fastcgi/httpd.conf"` i `/etc/httpd.conf`
-i `server "dikunix.dk"`-gruppen.
+Hav `include "/home/jordemoder/jordemoder/fastcgi/httpd.conf"` i
+`/etc/httpd.conf` i `server "dikunix.dk"`-gruppen.
 
 Sørg for at `fastcgi/start.sh` køres ved boot af jordemoder.
 
 Sørg for at `brugernissen.py` køres ved boot af root.
 
-Sørg for at kunne sende emails fra serveren.
+Sørg for at kunne sende emails fra serveren der ikke bliver fanget i KUs
+spamfilter.
 
 Nogle OpenBSD-indstillinger skal drejes lidt for at jordemoder har nok
 resurser til at køre uwsgi; se
