@@ -37,8 +37,8 @@ def make_user(fd, username, ssh_key):
                 f.write(ssh_key)
             www_home = '/var/www/htdocs/dikunix.dk/~' + username
             if subprocess.call(['mkdir', www_home]) != 0 or \
-                subprocess.call(['ln', '-s', www_home, 'public_html',
-                cwd='/home/' + username]) != 0:
+               subprocess.call(['ln', '-s', www_home, 'public_html'],
+                               cwd='/home/' + username) != 0:
                 fd.write('Failed to create dikunix.dk/~{}.'.format(username))
 
 FRONTEND_USERNAME='jordemoder'
