@@ -17,8 +17,8 @@ Hav `include "/home/jordemoder/jordemoder/fastcgi/httpd.conf"` i
 `/etc/httpd.conf` i `server "dikunix.dk"`-gruppen.
 
 Sørg for at `fastcgi/start.sh` køres ved boot af bruger `jordemoder` og
-at `brugernissen.py` køres ved boot af bruger `root`.  Sæt det op med
-`crontab` med `@reboot`-reglen.
+at `brugernissen-in-tmux.sh` køres ved boot af bruger `root`.  Sæt det
+op med `crontab` med `@reboot`-reglen.
 
 Sørg for at kunne sende emails fra serveren der ikke bliver fanget i KUs
 spamfilter.

@@ -35,7 +35,7 @@ def read_row(csv_path, func):
 
 def write_rows(csv_path, rows):
     existing = read_rows(csv_path, lambda *row: True)
-    with open(csv_path, 'w', encoding='utf-8') as f:
+    with open(csv_path, 'a', encoding='utf-8') as f:
         writer = csv.writer(f)
         writer.writerows(list(existing) + list(rows))
 
@@ -125,7 +125,7 @@ def ny_bruger_arbejd():
                                for i in range(9)])
     write_row(igang_csv, (navn, emailadresse, sshkey,
                           aktiveringskode, str(time.time())))
-    aktiveringslink = 'http://dikunix.dk/ny-bruger/?navn={}&aktivering={}'.format(
+    aktiveringslink = 'https://dikunix.dk/ny-bruger/?navn={}&aktivering={}'.format(
         navn, aktiveringskode)
 
     emailbesked = frafil('ny-bruger-elektropost.txt').format(
