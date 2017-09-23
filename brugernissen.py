@@ -45,8 +45,11 @@ FRONTEND_USERNAME='jordemoder'
 
 def run_main():
     if len(sys.argv) != 2:
-        sys.exit('Usage: %s <socket-filename>' % sys.argv[0])
-    socketname = sys.argv[1]
+        sys.exit('Usage: %s [socket filename]' % sys.argv[0])
+    try:
+        socketname = sys.argv[1]
+    except IndexError:
+        socketname = '/home/jordemoder/brugernissen.socket'
 
     frontend_uid=pwd.getpwnam(FRONTEND_USERNAME)[2]
 
@@ -60,19 +63,18 @@ def run_main():
     os.chmod(socketname, stat.S_IRUSR | stat.S_IWUSR | stat.S_IXUSR)
     s.listen(1)
 
-    print('Jeg står klar ved %s' % socketname)
+    print('Jeg står klar ved {}'.format(socketname).encode('utf-8'))
 
     while True:
         try:
             conn, addr = s.accept()
-            print('Der er en der banker på.')
+            print('Der er en der banker på.'.encode('utf-8'))
             fd = conn.makefile(mode='rw')
             conn.close() # fd keeps the socket alive.
             username = fd.readline().strip()
             ssh_key = fd.readline().strip()
 
-            print('Jeg er blevet bedt om at lave en bruger der hedder %s og som har SSH-nøglen %s' %
-                  (username, ssh_key))
+            print('Jeg er blevet bedt om at lave en bruger der hedder {} og som har SSH-nøglen {}'.format(username, ssh_key).encode('utf-8'))
 
             make_user(fd, username, ssh_key)
             fd.close()
