@@ -34,10 +34,9 @@ def read_row(csv_path, func):
         return rows[0]
 
 def write_rows(csv_path, rows):
-    existing = read_rows(csv_path, lambda *row: True)
     with open(csv_path, 'a', encoding='utf-8') as f:
         writer = csv.writer(f)
-        writer.writerows(list(existing) + list(rows))
+        writer.writerows(list(rows))
 
 def write_row(csv_path, row):
     write_rows(csv_path, [row])
