@@ -43,7 +43,10 @@ def write_row(csv_path, row):
     write_rows(csv_path, [row])
 
 def remove_rows(csv_path, func):
-    write_rows(csv_path, read_rows(csv_path, lambda *row: not func(*row)))
+    rows = list(read_rows(csv_path, lambda *row: not func(*row)))
+    with open(csv_path, 'w') as f:
+        f.write('');
+    write_rows(csv_path, rows)
 
 # Stier.
 igang_csv = '/home/jordemoder/midlertidige-oprettelser.csv'
